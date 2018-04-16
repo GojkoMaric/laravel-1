@@ -19,20 +19,18 @@ Route::get('/', function () {
 //     return view('home');
 // })->middleware('auth');
 
-Route::get('new', 'HomeController@index');    
+Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@index']);
+Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginController@store']); 
+Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 
-Route::get('users', 'UserController@index');
+Route::get('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@index']);
+Route::post('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@create']); 
 
-Route::get('login', function(){
-    return view('auth.login');
-});
-
-// Route::resource('users', 'UserController');
-Auth::routes();
-
-Route::post('register', 'Auth\RegisterController@create');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('new', 'HomeController@index');    
 
-
+Route::get('users', 'UserController@index');
+// Route::resource('users', 'UserController');
+// Auth::routes();

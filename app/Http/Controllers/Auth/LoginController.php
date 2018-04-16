@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -35,5 +36,34 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function index()
+    {
+        return view('auth.login');
+    }
+
+    public function store()
+    {
+        $user = User::where('email', request('email'));
+        if(!$user)
+        {
+            return back()->withErrors(['message' => 'Please verify your account.']);
+        }
+        if(!auth()->attempt(
+            request(['email', 'password'])
+        )){
+            return back()->withErrors([
+                'message' => 'Bad credentials. Please try again.'
+            ]);
+        }
+        return redirect('/home');
+    }
+
+    public function logout()
+    {
+        // dd(1);
+        auth()->logout();
+        return redirect('/home');
     }
 }
