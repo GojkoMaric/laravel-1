@@ -80,6 +80,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         \Auth::login($user);
+        // $userInfo=\Auth::user();
+        // return dd($userInfo);
+        // return view('home', compact(['userInfo']));
         return view('home');
     }
 

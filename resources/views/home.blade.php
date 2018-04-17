@@ -15,9 +15,13 @@
                     @endif
 
                     You are logged in!
+
+                    Your username is {{$user->first_name}}
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 @endsection
