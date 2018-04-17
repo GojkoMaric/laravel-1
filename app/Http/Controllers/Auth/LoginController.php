@@ -62,7 +62,6 @@ class LoginController extends Controller
 
     public function logout()
     {
-        // dd(1);
         auth()->logout();
         return redirect('/home');
     }

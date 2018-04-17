@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Country;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -48,11 +50,13 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $countriesList = implode(',', Country::$data);
         return Validator::make($data, [
-            'first_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255|min:2',
             'last_name' => 'required|string|max:255',
             'company' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
+            'country' => "required|string|in:$countriesList",
+            // 'country' => 'required|string|max:5',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -67,7 +71,7 @@ class RegisterController extends Controller
     protected function create()
     {
         $data = request()->all();
-        User::create([
+        $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'company' => $data['company'],
@@ -75,10 +79,13 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        \Auth::login($user);
         return view('home');
     }
 
-    public function index(){
-        return view('auth.register'); 
+    public function index()
+    {
+        $countries = Country::$data;
+        return view('auth.register', compact(['countries']));
     }
 }
