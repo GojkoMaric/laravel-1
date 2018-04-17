@@ -62,4 +62,8 @@
         </div>
     </div>
 </div>
+
+<script>
+console.log(test, 'in login blade.')
+</script>
 @endsection

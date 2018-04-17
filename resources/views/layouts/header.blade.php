@@ -45,3 +45,7 @@
                 </div>
             </div>
         </nav>
+        <script>
+            // anon(7,9)
+            console.log(test, 'in header blade.');
+        </script>
