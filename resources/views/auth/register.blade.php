@@ -63,7 +63,7 @@
                                     <option value=""></option>
                                     <option value="aaa">aaa</option>
                                     @foreach($countries as $country)
-                                    <option value="{{$country}}">{{$country}}</option>
+                                    <option value="{{$country->name}}">{{$country->name}}</option>
                                     @endforeach
                                 </select>
                                 @if ($errors->has('country'))

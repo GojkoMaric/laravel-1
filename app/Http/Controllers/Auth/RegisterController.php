@@ -88,7 +88,7 @@ class RegisterController extends Controller
 
     public function index()
     {
-        $countries = Country::$data;
+        $countries = Country::all();
         return view('auth.register', compact(['countries']));
     }
 }
