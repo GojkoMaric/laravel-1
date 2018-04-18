@@ -14,9 +14,11 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    @if(Auth::user())
+                        You are logged in!
 
-                    Your username is {{$user->first_name}}
+                        Your username is {{$user->first_name}} {{$user->last_name}}
+                    @endif
                 </div>
             </div>
         </div>

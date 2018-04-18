@@ -68,9 +68,7 @@
                                 </select>
                                 @if ($errors->has('country'))
                                     <div>
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('country') }}</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('country') }}</strong>
                                     </div>
                                 @endif
                             </div>

@@ -50,12 +50,13 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        $countriesList = implode(',', Country::$data);
+        // $countriesList = implode(',', Country::all());
         return Validator::make($data, [
             'first_name' => 'required|string|max:255|min:2',
             'last_name' => 'required|string|max:255',
             'company' => 'required|string|max:255',
-            'country' => "required|string|in:$countriesList",
+            'country' => "required|string|exists:countries,name",
+            // 'country' => "required|string|in:$countriesList",
             // 'country' => 'required|string|max:5',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
@@ -71,6 +72,14 @@ class RegisterController extends Controller
     protected function create()
     {
         $data = request()->all();
+        
+        $validator = $this->validator($data);
+        if($validator->fails()){
+            return redirect('register')
+            ->withErrors($validator)
+            ->withInput();
+        }
+
         $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
@@ -83,7 +92,7 @@ class RegisterController extends Controller
         // $userInfo=\Auth::user();
         // return dd($userInfo);
         // return view('home', compact(['userInfo']));
-        return view('home');
+        return view('home', compact(['user']));
     }
 
     public function index()

@@ -27,6 +27,8 @@ Route::post('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::redirect('/{a}', '/home');
+
 // Route::get('new', 'HomeController@index');    
 
 // Route::get('users', 'UserController@index');
