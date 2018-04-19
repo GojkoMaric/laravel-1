@@ -18,8 +18,7 @@ Route::get('/', function () {
 Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@index']);
 Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginController@store']); 
 
-Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
-Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout'])->middleware('guest');
+Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout'])->middleware('auth');
 
 
 Route::get('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@index']);
