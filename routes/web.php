@@ -11,29 +11,6 @@
 |
 */
 
-Route::get('/', 'TodoController@index');
-
-Route::get('/todos', 'TodoController@getTodos');
-Route::post('/todos', 'TodoController@postTodo');
-Route::delete('/todos/{id}', 'TodoController@destroyTodo');
-Route::put('/todos/{id}', 'TodoController@updateTodo');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Route::get('/welcome', function () {
     return view('welcome');
 });
