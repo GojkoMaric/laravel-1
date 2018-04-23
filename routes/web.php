@@ -11,7 +11,30 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', 'TodoController@index');
+
+Route::get('/todos', 'TodoController@getTodos');
+Route::post('/todos', 'TodoController@postTodo');
+Route::delete('/todos/{id}', 'TodoController@destroyTodo');
+Route::put('/todos/{id}', 'TodoController@updateTodo');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
@@ -25,6 +48,10 @@ Route::get('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@i
 Route::post('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@create']); 
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/vue', function(){
+    return view('vue');
+});
 
 Route::redirect('/{a}', '/home');
 
